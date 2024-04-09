@@ -1,13 +1,22 @@
 import express from "express"
+import { connection as db}  from "./src/utils/database.js"
 
 const PORT = process.env.PORT ?? 3000
 const app = express()
-
-app.get('/', (req, res) => {
+//
+let data = async () =>{
+    let res = await db.execute("SELECT * FROM test1")
+    return res
+}
+//
+app.get('/', async (req, res) => {
     console.log(`root get `)
-    res.status(200).send('ok')
+    let resul = await data()
+    console.log(resul)
+    res.status(200).send(resul)
 })
 
 app.listen(PORT, () => {
     console.log(`server listen ${PORT}`)
 })
+
