@@ -16,11 +16,7 @@ export class BasicQuerys {
 
     static async getElements({tabla}) {
         let query = `SELECT * FROM ${tabla} `
-        // console.log('query: ', query)
         query = await BasicQuerys.querys({query}) 
-        // console.log('inside class', query)
-        // return await BasicQuerys.querys(query) 
-        // console.log('call query')   
         return query[0]
     } 
 
