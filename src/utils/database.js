@@ -16,7 +16,7 @@ try{
 }catch(err){
     connection = 'null'
     console.log("error en la conexion con la base de datos ", err)
-}
+} 
 
 
 export {connection}
