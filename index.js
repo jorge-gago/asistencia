@@ -9,7 +9,7 @@ let data = async () =>{
     // let res = await db.execute("SELECT * FROM test1")
     query.setDb({db})
     console.log(query.getDb()?true:false)
-    let res = query.getElements({tabla: "test1"})
+    let res = await query.getElements({tabla: "test1"})
     return res  
 }
 //

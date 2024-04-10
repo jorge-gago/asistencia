@@ -10,19 +10,18 @@ export class BasicQuerys {
         return this.db
     }
 
-    async querys ({query, values = [], db = this.db }) {
-        await db.execute(query, values)
+    static async querys ({query, values = [], db = this.db }) {
+        return await db.execute(query, values)
     }
 
     static async getElements({tabla}) {
         let query = `SELECT * FROM ${tabla} `
-        console.log(query)
-        query = await BasicQuerys.querys(query) 
-        console.log(query)
+        // console.log('query: ', query)
+        query = await BasicQuerys.querys({query}) 
+        // console.log('inside class', query)
         // return await BasicQuerys.querys(query) 
-        console.log('call query')   
-        return 'call'
-    }
-
+        // console.log('call query')   
+        return query[0]
+    } 
 
 }
