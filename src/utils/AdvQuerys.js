@@ -1,3 +1,5 @@
-export class Advquerys extends BasicQuerys {
+import {BasicQuerys} from "./BasicQuerys.js"
+
+export class AdvQuerys extends BasicQuerys {
 
 }

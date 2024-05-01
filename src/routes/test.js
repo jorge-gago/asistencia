@@ -1,8 +1,12 @@
 import express from "express"
-import {elements} from "../controllers/test.js"
+import {elements, create, deletes} from "../controllers/test.js"
 
 const router = express.Router()
 
 router.get("/", elements)
 
-export {router as test} 
+router.post("/", create)
+
+router.delete("/", deletes)
+
+export {router as test}  
