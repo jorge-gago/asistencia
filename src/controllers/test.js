@@ -1,4 +1,4 @@
-import {getElements, createElement, deleteElement} from "../modules/test.js"
+import {getElements, createElement, deleteElement, updateElement} from "../modules/test.js"
 
 const elements = async (req, res) => {
     // console.log("en controller ")
@@ -12,6 +12,12 @@ const create = async ( req, res) => {
     res.send(resul)
 }
 
+const update = async ( req, res) => {
+    console.log("update")
+    let resul = await updateElement()
+    res.send(resul)
+}
+
 const deletes = async ( req, res) => {
     console.log("delete element")
 
@@ -21,4 +27,4 @@ const deletes = async ( req, res) => {
 
 
 
-export {elements, create, deletes}
+export {elements, create, deletes, update}

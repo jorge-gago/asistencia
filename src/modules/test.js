@@ -15,7 +15,11 @@ const createElement = async () => {
 }
 
 const updateElement = async () => {
-    let resul = await query.updateElement({table, vals})
+    let id = 38
+    let vals = ["test update"]
+    let columns = ["nombre"]
+
+    let resul = await query.updateElement({ table, id, columns, vals})
 }
 
 const deleteElement = async () => {
@@ -23,4 +27,4 @@ const deleteElement = async () => {
     let resul = await query.deleteElement({table, vals})
 }
 
-export {getElements, createElement, deleteElement} 
+export {getElements, createElement, deleteElement, updateElement} 

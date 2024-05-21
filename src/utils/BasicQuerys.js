@@ -47,8 +47,12 @@ export class BasicQuerys {
 
     }
 
-    static async updateElement ({table, id}) {
-
+    static async updateElement ({table, pk , key = "id", columns = [], vals}) {
+        let cols = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
+        let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
+        let values = [...vals, id]
+        console.log(query, values)
+        query = await BasicQuerys.querys({query, values: vals})
     }
 
     static async deleteElement ({table, vals, key = "id"}) {
