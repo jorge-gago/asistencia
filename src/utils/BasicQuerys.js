@@ -19,13 +19,13 @@ export class BasicQuerys {
         // console.log(values)
         // console.log(`query: ${query}`)
         // console.log(`values: ${values}`,  [values])
-        return await db.execute(query, [values])
+        return await db.query(query, values)
         
     }
 
     static async getElements({table}) {
-        let query = `SELECT * FROM ${table} `
-        query = await BasicQuerys.querys({query}) 
+        let query = `SELECT * FROM ?? `
+        query = await BasicQuerys.querys({query, values: [table]}) 
         return query[0]
     } 
 
@@ -43,7 +43,7 @@ export class BasicQuerys {
         console.log("create done")
         return query*/
 
-        this.db.execute(`INSERT INTO ${table} (${columns}) VALUES (?) `, vals)
+        this.db.execute(`INSERT INTO ?? (??) VALUES (?) `, vals)
 
     }
 

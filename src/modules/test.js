@@ -1,6 +1,6 @@
 import {AdvQuerys as query} from "../utils/AdvQuerys.js"
 
-const table = "test1"
+// const table = "test1"
 
 const getElements = async () => {
     let resul = await query.getElements({table})
@@ -27,4 +27,11 @@ const deleteElement = async () => {
     let resul = await query.deleteElement({table, vals})
 }
 
-export {getElements, createElement, deleteElement, updateElement} 
+const dev = async ({table }) => { 
+    console.log('test query run')
+    let resul = await query.callTest({table, cols: ['id', 'nombre']}) ?? {body: 'test response default'}
+    console.log(resul)
+    return resul
+}  
+
+export {getElements, createElement, deleteElement, updateElement, dev} 

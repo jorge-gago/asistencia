@@ -9,6 +9,8 @@ const app = express()
 //set database connection 
 query.setDb({db})
 
+app.use(express.json())
+
 //temps 
 let data = async () =>{
     // let res = await db.execute("SELECT * FROM test1")

@@ -1,5 +1,7 @@
 import {getElements, createElement, deleteElement, updateElement} from "../modules/test.js"
 
+import {dev} from "../modules/test.js" // for test 
+
 const elements = async (req, res) => {
     // console.log("en controller ")
     let resul = await getElements()
@@ -27,4 +29,23 @@ const deletes = async ( req, res) => {
 
 
 
-export {elements, create, deletes, update}
+
+
+
+const test = async ( req, res) => {
+    let info = req.body.campos
+    let tab = 'test1'
+
+    let resu = await dev({table:tab})
+
+    console.log(info)
+
+    let resul = {ok: 'ok'} //await dev()
+    res.json(resu)
+}
+
+
+
+
+
+export {elements, create, deletes, update, test}

@@ -1,5 +1,5 @@
 import express from "express"
-import {elements, create, deletes, update} from "../controllers/test.js"
+import {elements, create, deletes, update, test} from "../controllers/test.js"
 
 const router = express.Router()
 
@@ -10,5 +10,7 @@ router.post("/", create)
 router.put("/", update)
 
 router.delete("/", deletes)
+
+router.use("/test", test)
 
 export {router as test}  
