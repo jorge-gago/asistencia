@@ -30,25 +30,38 @@ const deletes = async ( req, res) => {
 }
 
 
+const getTable = async (req) => {
+    let info = req.params.sec
+    console.log(info)
+    let sec = options[`${info}`]
+    console.log('sec: ', sec)
 
+    return sec
+}
 
+const noTable = async (res) => {
+    console.log("404 route")
+    return res.status(404).json({msn: "404"})
+}
 
 
 const test = async ( req, res) => {
-    let info = req.params.sec
+    // let info = req.params.sec
 
-    console.log(info)
+    // console.log(info)
 
-    let sec = options[`${info}`] 
+    // let sec = options[`${info}`] 
+    let sec = await getTable(req) ?? noTable(res)  //<----------------- getTable & noTable to middleware for validation route
 
-    if(!sec) { // for route dont exist
-        console.log("404 route")
-        return res.status(404).json({msn: "404"})
-    }
 
-    console.log('sec: ', sec)
+    // if(!sec) { // for route dont exist
+    //     console.log("404 route")
+    //     return res.status(404).json({msn: "404"})
+    // }
 
-    let tab = 'test1'
+    // console.log('sec: ', sec)
+
+    // let tab = 'test1'
 
     let resu = await dev({table:sec})
 
