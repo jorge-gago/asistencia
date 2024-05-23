@@ -11,6 +11,8 @@ router.put("/", update)
 
 router.delete("/", deletes)
 
-router.use("/test", test)
+router.use("/:sec", test)
+
+// router.use("/test", test)
 
 export {router as test}  

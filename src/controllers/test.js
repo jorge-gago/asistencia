@@ -2,6 +2,8 @@ import {getElements, createElement, deleteElement, updateElement} from "../modul
 
 import {dev} from "../modules/test.js" // for test 
 
+const options = {test: "test1"}
+
 const elements = async (req, res) => {
     // console.log("en controller ")
     let resul = await getElements()
@@ -33,14 +35,26 @@ const deletes = async ( req, res) => {
 
 
 const test = async ( req, res) => {
-    let info = req.body.campos
-    let tab = 'test1'
-
-    let resu = await dev({table:tab})
+    let info = req.params.sec
 
     console.log(info)
 
-    let resul = {ok: 'ok'} //await dev()
+    let sec = options[`${info}`] 
+
+    if(!sec) { // for route dont exist
+        console.log("404 route")
+        return res.status(404).json({msn: "404"})
+    }
+
+    console.log('sec: ', sec)
+
+    let tab = 'test1'
+
+    let resu = await dev({table:sec})
+
+   
+
+    let resul = {ok: 'ok'} //await dev() placeholder
     res.json(resu)
 }
 
