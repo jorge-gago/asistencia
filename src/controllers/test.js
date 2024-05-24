@@ -30,28 +30,13 @@ const deletes = async ( req, res) => {
 }
 
 
-const getTable = async (req) => {
-    let info = req.params.sec
-    console.log(info)
-    let sec = options[`${info}`]
-    console.log('sec: ', sec)
-
-    return sec
-}
-
-const noTable = async (res) => {
-    console.log("404 route")
-    return res.status(404).json({msn: "404"})
-}
-
-
 const test = async ( req, res) => {
     // let info = req.params.sec
 
     // console.log(info)
 
     // let sec = options[`${info}`] 
-    let sec = await getTable(req) ?? noTable(res)  //<----------------- getTable & noTable to middleware for validation route
+    //let sec = await getTable(req) ?? noTable(res)  //<----------------- getTable & noTable to middleware for validation route
 
 
     // if(!sec) { // for route dont exist
@@ -63,12 +48,12 @@ const test = async ( req, res) => {
 
     // let tab = 'test1'
 
-    let resu = await dev({table:sec})
+    //let resu = await dev({table:sec})
 
    
 
     let resul = {ok: 'ok'} //await dev() placeholder
-    res.json(resu)
+    res.json(resul)
 }
 
 
