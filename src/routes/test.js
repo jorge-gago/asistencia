@@ -4,15 +4,15 @@ import {elements, create, deletes, update, test} from "../controllers/test.js"
 
 const router = express.Router()
 
-router.get("/", elements)
+router.get("/:sec", toTable, elements)
 
-router.post("/", create)
+router.post("/:sec", toTable, create)
 
-router.put("/", update)
+router.put("/:sec", toTable, update)
 
-router.delete("/", deletes)
+router.delete("/:sec", toTable, deletes)
 
-router.use("/:sec", toTable, test)
+router.use("/t/:sec", toTable, test)
 
 // router.use("/test", test)
 

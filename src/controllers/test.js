@@ -2,62 +2,55 @@ import {getElements, createElement, deleteElement, updateElement} from "../modul
 
 import {dev} from "../modules/test.js" // for test 
 
-const options = {test: "test1"}
+// const options = {test: "test1"}
 
 const elements = async (req, res) => {
     // console.log("en controller ")
-    let resul = await getElements()
+    let table = req.table
+    let resul = await getElements({table})
     res.send(resul)
 } 
 
+const filterElements = async (req, res) => {
+    let table = req.table
+    let cols = req.body.filters 
+    let vals = req.body.data
+    let resul = await getElements({table, cols, vals})
+    res.send(resul)
+}
+
 const create = async ( req, res) => {
     console.log("creando")
-    let resul = await createElement()
+    let table = req.table
+    let cols = req.body.fields 
+    let vals = req.body.data
+    let resul = await createElement({table, cols, vals})
     res.send(resul)
 }
 
 const update = async ( req, res) => {
     console.log("update")
-    let resul = await updateElement()
+    let table = req.table
+    let resul = await updateElement({table, cols, vals})
     res.send(resul)
 }
 
-const deletes = async ( req, res) => {
+const deletes = async ( req, res) => { //<---------- falta ajustar delete parametros
     console.log("delete element")
-
+    let table = req.table
     let resul = await deleteElement()
     res.send(resul)
 }
 
 
 const test = async ( req, res) => {
-    // let info = req.params.sec
+    let resu = await dev({table: req.table})
 
-    // console.log(info)
-
-    // let sec = options[`${info}`] 
-    //let sec = await getTable(req) ?? noTable(res)  //<----------------- getTable & noTable to middleware for validation route
-
-
-    // if(!sec) { // for route dont exist
-    //     console.log("404 route")
-    //     return res.status(404).json({msn: "404"})
-    // }
-
-    // console.log('sec: ', sec)
-
-    // let tab = 'test1'
-
-    //let resu = await dev({table:sec})
-
-   
-
-    let resul = {ok: 'ok'} //await dev() placeholder
-    res.json(resul)
+    res.json(resu)
 }
 
 
 
 
 
-export {elements, create, deletes, update, test}
+export {elements, filterElements, create, deletes, update, test}

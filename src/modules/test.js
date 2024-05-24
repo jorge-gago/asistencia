@@ -2,28 +2,28 @@ import {AdvQuerys as query} from "../utils/AdvQuerys.js"
 
 // const table = "test1"
 
-const getElements = async () => {
+const getElements = async ({table, cols = null, vals = null}) => {
     let resul = await query.getElements({table})
     return resul 
 }
 
-const createElement = async () => {
-    let cols = ["nombre"]
-    let vals = ["test_t", "other"]
+const createElement = async ({table, cols, vals}) => {
+    // let cols = ["nombre"]
+    // let vals = ["test_t", "other"]
     let resul = await query.createElement({table, cols, vals})
     return resul
 }
 
-const updateElement = async () => {
-    let id = 38
-    let vals = ["test update"]
-    let columns = ["nombre"]
+const updateElement = async ({table, cols, vals, id}) => {
+    // let id = 38
+    // let vals = ["test update"]
+    // let columns = ["nombre"]
 
     let resul = await query.updateElement({ table, id, columns, vals})
 }
 
-const deleteElement = async () => {
-    let vals = "35"
+const deleteElement = async ({table, cols, vals}) => {
+    // let vals = "35"
     let resul = await query.deleteElement({table, vals})
 }
 
