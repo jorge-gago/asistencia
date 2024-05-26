@@ -13,7 +13,7 @@ const elements = async (req, res) => {
 
 const filterElements = async (req, res) => {
     let table = req.table
-    let cols = req.body.filters 
+    let cols = req.body.fields 
     let vals = req.body.data
     let resul = await getElements({table, cols, vals})
     res.send(resul)
@@ -24,6 +24,11 @@ const create = async ( req, res) => {
     let table = req.table
     let cols = req.body.fields 
     let vals = req.body.data
+
+    console.log(cols)
+    console.log(`table: ${table} / cols: ${cols} /  vals: ${vals}`)
+
+    // let resul = {msn: 'test'}
     let resul = await createElement({table, cols, vals})
     res.send(resul)
 }
@@ -31,6 +36,8 @@ const create = async ( req, res) => {
 const update = async ( req, res) => {
     console.log("update")
     let table = req.table
+    let cols = req.body.fields 
+    let vals = req.body.data
     let resul = await updateElement({table, cols, vals})
     res.send(resul)
 }
@@ -38,6 +45,8 @@ const update = async ( req, res) => {
 const deletes = async ( req, res) => { //<---------- falta ajustar delete parametros
     console.log("delete element")
     let table = req.table
+    let cols = req.body.fields ?? null
+    let vals = req.body.data
     let resul = await deleteElement()
     res.send(resul)
 }

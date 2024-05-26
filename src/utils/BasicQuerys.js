@@ -30,7 +30,18 @@ export class BasicQuerys {
     } 
 
     static async createElement ({table, cols, vals}) {
-        let columns = BasicQuerys.joinsValues(cols)
+        let query = `INSERT INTO ?? (??) VALUES (?) `
+        let qv1 = "test1"
+        let qv2 = "nombre"
+        let va = "inside"
+
+        // console.log(qv)
+
+        // return {"msn": qv}
+
+        return BasicQuerys.querys({query, values:[ table, ...cols, vals]})
+
+        // let columns = BasicQuerys.joinsValues(cols)
         // let data = BasicQuerys.joinsValues(vals)
         // let values = vals
 
@@ -43,22 +54,28 @@ export class BasicQuerys {
         console.log("create done")
         return query*/
 
-        this.db.execute(`INSERT INTO ?? (??) VALUES (?) `, vals)
+        // this.db.execute(`INSERT INTO ?? (??) VALUES (?) `, vals)<------------------------------ funcional
 
     }
 
-    static async updateElement ({table, pk , key = "id", columns = [], vals}) {
-        let cols = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
-        let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
-        let values = [...vals, id]
-        console.log(query, values)
-        query = await BasicQuerys.querys({query, values: vals})
+    static async updateElement ({table, pk , key = "id", id, cols = [], vals}) {
+        // let columns = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
+        // let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
+        let query = (`UPDATE ?? SET ?? WHERE ?? = ?`)
+        // let values = [...vals, id]
+        // console.log(query, values)
+        // query = await BasicQuerys.querys({query, values: vals})
+        query = await BasicQuerys.querys({query, values: [[table, ...cols, key], ...vals, id]})
+
+        
     }
 
     static async deleteElement ({table, vals, key = "id"}) {
-        let query = `DELETE FROM ${table} WHERE ${key} = ?`
+        // let query = `DELETE FROM ${table} WHERE ${key} = ?`
 
-        query = await BasicQuerys.querys({query, values: vals})
+        let query = `DELETE FROM ?? WHERE ?? = ?`
+
+        query = await BasicQuerys.querys({query, values: [[table, key], vals]})
         return query
     }
 
