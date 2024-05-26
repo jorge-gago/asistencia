@@ -19,7 +19,7 @@ const updateElement = async ({table, cols, vals, id}) => {
     // let vals = ["test update"]
     // let columns = ["nombre"]
 
-    let resul = await query.updateElement({ table, id, columns, vals})
+    let resul = await query.updateElement({ table, id, cols, vals})
 }
 
 const deleteElement = async ({table, cols, vals}) => {

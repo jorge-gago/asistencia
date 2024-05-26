@@ -38,7 +38,8 @@ const update = async ( req, res) => {
     let table = req.table
     let cols = req.body.fields 
     let vals = req.body.data
-    let resul = await updateElement({table, cols, vals})
+    let id = req.body.id
+    let resul = await updateElement({table, cols, vals, id})
     res.send(resul)
 }
 

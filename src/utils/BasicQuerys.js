@@ -31,41 +31,25 @@ export class BasicQuerys {
 
     static async createElement ({table, cols, vals}) {
         let query = `INSERT INTO ?? (??) VALUES (?) `
-        let qv1 = "test1"
-        let qv2 = "nombre"
-        let va = "inside"
-
-        // console.log(qv)
-
-        // return {"msn": qv}
-
         return BasicQuerys.querys({query, values:[ table, ...cols, vals]})
-
-        // let columns = BasicQuerys.joinsValues(cols)
-        // let data = BasicQuerys.joinsValues(vals)
-        // let values = vals
-
-        // console.log(vals)
-
-        /*
-
-        let query = `INSERT INTO ${table} (${columns}) VALUES (?) `
-        query = await BasicQuerys.querys({query, values: vals}) 
-        console.log("create done")
-        return query*/
-
-        // this.db.execute(`INSERT INTO ?? (??) VALUES (?) `, vals)<------------------------------ funcional
-
     }
 
     static async updateElement ({table, pk , key = "id", id, cols = [], vals}) {
+        console.log("creando")
+
         // let columns = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
         // let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
         let query = (`UPDATE ?? SET ?? WHERE ?? = ?`)
         // let values = [...vals, id]
         // console.log(query, values)
         // query = await BasicQuerys.querys({query, values: vals})
-        query = await BasicQuerys.querys({query, values: [[table, ...cols, key], ...vals, id]})
+
+        console.log(`table:${table}| key:${key}| id:${id}|  col:${cols}| val:${vals}`)
+
+        return {msn:"test"}
+
+
+        // query = await BasicQuerys.querys({query, values: [table, ...cols, key, ...vals, id]})
 
         
     }
