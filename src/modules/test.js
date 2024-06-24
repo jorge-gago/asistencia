@@ -20,6 +20,7 @@ const updateElement = async ({table, cols, vals, id}) => {
     // let columns = ["nombre"]
 
     let resul = await query.updateElement({ table, id, cols, vals})
+    return resul
 }
 
 const deleteElement = async ({table, cols, vals}) => {

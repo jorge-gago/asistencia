@@ -40,15 +40,18 @@ export class BasicQuerys {
         // let columns = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
         // let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
         let query = (`UPDATE ?? SET ?? WHERE ?? = ?`)
-        // let values = [...vals, id]
+        let columns = await BasicQuerys.addPh(cols)
+        let values = [table, ...columns, vals, key, id]
         // console.log(query, values)
-        // query = await BasicQuerys.querys({query, values: vals})
+        console.log(`query: ${query}, values: ${values}`)
+        query = await BasicQuerys.querys({query, values})
 
         console.log(`table:${table}| key:${key}| id:${id}|  col:${cols}| val:${vals}`)
+        // console.log(`query: ${query}, values: ${values}`)
 
         return {msn:"test"}
 
-
+  
         // query = await BasicQuerys.querys({query, values: [table, ...cols, key, ...vals, id]})
 
         
@@ -64,6 +67,13 @@ export class BasicQuerys {
     }
 
        
-
+    static async addPh (list) {
+        // console.log("list ", list) 
+        let res = await list.map(element => {
+            return `${element} = ?` 
+        });
+        // console.log(res)
+        return res 
+    }
 }
 
