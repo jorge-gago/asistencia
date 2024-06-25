@@ -33,15 +33,19 @@ export class BasicQuerys {
         let query = `INSERT INTO ?? (??) VALUES (?) `
         return BasicQuerys.querys({query, values:[ table, ...cols, vals]})
     }
+ 
 
     static async updateElement ({table, pk , key = "id", id, cols = [], vals}) {
         console.log("creando")
 
+        let columns = `?? = ?`
+        let values = [table, cols, vals, key, id]
+
         // let columns = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
         // let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
-        let query = (`UPDATE ?? SET ?? WHERE ?? = ?`)
-        let columns = await BasicQuerys.addPh(cols)
-        let values = [table, ...columns, vals, key, id]
+        let query = (`UPDATE ?? SET ${columns} WHERE ?? = ?`)
+        // let columns = await BasicQuerys.addPh(cols)
+
         // console.log(query, values)
         console.log(`query: ${query}, values: ${values}`)
         query = await BasicQuerys.querys({query, values})
@@ -49,7 +53,7 @@ export class BasicQuerys {
         console.log(`table:${table}| key:${key}| id:${id}|  col:${cols}| val:${vals}`)
         // console.log(`query: ${query}, values: ${values}`)
 
-        return {msn:"test"}
+        return {msn:"test"}  
 
   
         // query = await BasicQuerys.querys({query, values: [table, ...cols, key, ...vals, id]})
@@ -67,13 +71,5 @@ export class BasicQuerys {
     }
 
        
-    static async addPh (list) {
-        // console.log("list ", list) 
-        let res = await list.map(element => {
-            return `${element} = ?` 
-        });
-        // console.log(res)
-        return res 
-    }
 }
 

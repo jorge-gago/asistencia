@@ -16,4 +16,18 @@ export class AdvQuerys extends BasicQuerys {
 
         return res
     }
+
+
+   
+    // static async addPh (list) {
+    //     // console.log("list ", list) 
+    //     let res = ""
+    //     await list.map(element => {
+    //         res += `${element} = ?,` 
+    //     });
+    //     res = res.slice(0,-1)
+    //     // console.log(res)
+    //     return res 
+    // }
+
 }
