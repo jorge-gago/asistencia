@@ -35,11 +35,29 @@ export class BasicQuerys {
     }
  
 
-    static async updateElement ({table, pk , key = "id", id, cols = [], vals}) {
+    static async updateElement ({table, pk , key = "id", id, cols = [], vals=[]}) {
         console.log("creando")
+        let placeHolder = `?? = ?, `
 
-        let columns = `?? = ?`
-        let values = [table, cols, vals, key, id]
+        //<--------------
+        let columns = ``
+        cols.forEach(element => {
+            columns += placeHolder
+        });
+        //<----------------------
+
+        //<----------------------
+        let temp = []
+        cols.map(x, i => {
+            temp.push(cols[i])
+            temp.push(vals[i])
+        })
+        console.log(temp)
+
+        //<----------------------
+
+        // let values = [table, ...cols, ...vals, key, id]
+        let values = [table, ...cols, ...vals, key, id]
 
         // let columns = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
         // let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
@@ -48,12 +66,12 @@ export class BasicQuerys {
 
         // console.log(query, values)
         console.log(`query: ${query}, values: ${values}`)
-        query = await BasicQuerys.querys({query, values})
+        query = await BasicQuerys.querys({query, values}) 
 
         console.log(`table:${table}| key:${key}| id:${id}|  col:${cols}| val:${vals}`)
         // console.log(`query: ${query}, values: ${values}`)
 
-        return {msn:"test"}  
+        return {msn:"test"}   
 
   
         // query = await BasicQuerys.querys({query, values: [table, ...cols, key, ...vals, id]})
