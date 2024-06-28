@@ -44,32 +44,28 @@ export class BasicQuerys {
         cols.forEach(element => {
             columns += placeHolder
         });
-        //<----------------------
+        columns = columns.slice(0,-2)
+        //----------------------
 
         //<----------------------
         let temp = []
-        cols.map(x, i => {
+        cols.map((x, i) => {
             temp.push(cols[i])
             temp.push(vals[i])
         })
-        console.log(temp)
+        console.log('temp ', temp)
 
-        //<----------------------
+        //----------------------
 
         // let values = [table, ...cols, ...vals, key, id]
-        let values = [table, ...cols, ...vals, key, id]
-
-        // let columns = `${columns.length > 1? columns.join(" = ?, "): columns} = ?`
-        // let query = (`UPDATE ${table} SET ${cols} WHERE ${key} = ${id}`)
+        let values = [table, ...temp, key, id]
         let query = (`UPDATE ?? SET ${columns} WHERE ?? = ?`)
-        // let columns = await BasicQuerys.addPh(cols)
-
-        // console.log(query, values)
+        
         console.log(`query: ${query}, values: ${values}`)
-        query = await BasicQuerys.querys({query, values}) 
+        query = await BasicQuerys.querys({query, values})
 
         console.log(`table:${table}| key:${key}| id:${id}|  col:${cols}| val:${vals}`)
-        // console.log(`query: ${query}, values: ${values}`)
+        
 
         return {msn:"test"}   
 
