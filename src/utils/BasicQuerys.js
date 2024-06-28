@@ -36,43 +36,14 @@ export class BasicQuerys {
  
 
     static async updateElement ({table, pk , key = "id", id, cols = [], vals=[]}) {
-        console.log("creando")
-        let placeHolder = `?? = ?, `
-
-        //<--------------
-        let columns = ``
-        cols.forEach(element => {
-            columns += placeHolder
-        });
-        columns = columns.slice(0,-2)
-        //----------------------
-
-        //<----------------------
-        let temp = []
-        cols.map((x, i) => {
-            temp.push(cols[i])
-            temp.push(vals[i])
-        })
-        console.log('temp ', temp)
-
-        //----------------------
-
-        // let values = [table, ...cols, ...vals, key, id]
-        let values = [table, ...temp, key, id]
-        let query = (`UPDATE ?? SET ${columns} WHERE ?? = ?`)
+        let placeHolders = await BasicQuerys.addPlaceHolders({list: cols})
+        let arrayElements = await BasicQuerys.arrayElements({cols, vals})
+        let values = [table, ...arrayElements, key, id]
+        let query = (`UPDATE ?? SET ${placeHolders} WHERE ?? = ?`)
         
-        console.log(`query: ${query}, values: ${values}`)
         query = await BasicQuerys.querys({query, values})
-
-        console.log(`table:${table}| key:${key}| id:${id}|  col:${cols}| val:${vals}`)
         
-
-        return {msn:"test"}   
-
-  
-        // query = await BasicQuerys.querys({query, values: [table, ...cols, key, ...vals, id]})
-
-        
+        return {msn:"test"}    //<------------------------------------------------------ 
     }
 
     static async deleteElement ({table, vals, key = "id"}) {
@@ -82,6 +53,29 @@ export class BasicQuerys {
 
         query = await BasicQuerys.querys({query, values: [[table, key], vals]})
         return query
+    }
+
+    static async addPlaceHolders ({list = []}) {
+        let placeHolder = `?? = ?, `
+        let placeHolders = ``
+
+        list.forEach(element => {
+            placeHolders += placeHolder
+        });
+        placeHolders = placeHolders.slice(0,-2)
+
+        return placeHolders
+
+    }
+
+    static async arrayElements ({cols = [], vals = [] }) {
+        let temp = []
+        cols.map((x, i) => {
+            temp.push(cols[i])
+            temp.push(vals[i])
+        })
+
+        return temp
     }
 
        
