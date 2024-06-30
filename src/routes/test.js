@@ -1,10 +1,12 @@
 import express from "express"
 import { toTable } from "../middleware/toTable.js"
-import {elements, create, deletes, update, test} from "../controllers/test.js"
+import {elements, filter, create, deletes, update, test} from "../controllers/test.js"
 
 const router = express.Router()
 
 router.get("/:sec", toTable, elements)
+
+router.post("/:sec/get", toTable, filter)
 
 router.post("/:sec", toTable, create)
 

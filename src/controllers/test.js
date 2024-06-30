@@ -1,4 +1,4 @@
-import {getElements, createElement, deleteElement, updateElement} from "../modules/test.js"
+import {getElements, getFilterElements, createElement, deleteElement, updateElement} from "../modules/test.js"
 
 import {dev} from "../modules/test.js" // for test 
 
@@ -11,16 +11,18 @@ const elements = async (req, res) => {
     res.send(resul)
 } 
 
-const filterElements = async (req, res) => {
+const filter = async (req, res) => {
+    //console.log("filter")
     let table = req.table
     let cols = req.body.fields 
     let vals = req.body.data
-    let resul = await getElements({table, cols, vals})
+    let resul = await getFilterElements({table, cols, vals})
     res.send(resul)
 }
 
+
 const create = async ( req, res) => {
-    console.log("creando")
+    //console.log("creando")
     let table = req.table
     let cols = req.body.fields 
     let vals = req.body.data
@@ -34,7 +36,7 @@ const create = async ( req, res) => {
 }
 
 const update = async ( req, res) => {
-    console.log("update")
+    //console.log("update")
     let table = req.table
     let cols = req.body.fields 
     let vals = req.body.data
@@ -44,7 +46,7 @@ const update = async ( req, res) => {
 }
 
 const deletes = async ( req, res) => { //<---------- falta ajustar delete parametros
-    console.log("delete element")
+    //console.log("delete element")
     let table = req.table
     let cols = req.body.fields ?? null
     let vals = req.body.data
@@ -63,4 +65,4 @@ const test = async ( req, res) => {
 
 
 
-export {elements, filterElements, create, deletes, update, test}
+export {elements, filter, create, deletes, update, test}
