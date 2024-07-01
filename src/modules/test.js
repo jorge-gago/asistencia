@@ -23,7 +23,8 @@ const updateElement = async ({table, cols, vals, id}) => {
 }
 
 const deleteElement = async ({table, cols, vals}) => {
-    let result = await query.deleteElement({table, vals})
+
+    let result = await query.deleteElement({table, vals, key: cols})
 }
 
 const dev = async ({table }) => { 

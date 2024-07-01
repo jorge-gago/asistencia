@@ -18,54 +18,56 @@ export class BasicQuerys {
     static async querys ({query, values = [], db = this.db }) {
         // console.log(values)
         // console.log(`query: ${query}`)
-        // console.log(`values: ${values}`,  [values])
+        // console.log(`values: ${values}`,  [values]
+        // console.log(db)
         return await db.query(query, values)
         
     }
 
-    static async getElements({table, cols=null, vals=null}) {
+    static async getElements({table, db}) {
         let result 
         let query = `SELECT * FROM ?? `
 
-        query = await BasicQuerys.querys({query, values: [table]}) 
+        query = await BasicQuerys.querys({query, values: [table], db}) 
         result = query[0]
         
         return result
     } 
 
-    static async getFilterElements ({table, cols, vals, div = "AND"}){
+    static async getFilterElements ({table, cols, vals, div = "AND", db}){
         let placeHolders = await BasicQuerys.addPlaceHolders({list: cols, div})
         let arrayElements = await BasicQuerys.arrayElements({cols, vals})
         let query = `SELECT * FROM ?? WHERE ${placeHolders} `
         let values = [table, ...arrayElements]
         let result
 
-        result = await BasicQuerys.querys({query, values}) 
+        result = await BasicQuerys.querys({query, values, db}) 
 
         return result[0]
     }
 
-    static async createElement ({table, cols, vals}) {
+    static async createElement ({table, cols, vals, db}) {
         let query = `INSERT INTO ?? (??) VALUES (?) `
-        return BasicQuerys.querys({query, values:[ table, ...cols, vals]})
+        return BasicQuerys.querys({query, values:[ table, ...cols, vals], db})
     }
  
-    static async updateElement ({table, pk , key = "id", id, cols = [], vals=[]}) {
+    static async updateElement ({table, pk , key = "id", id, cols = [], vals=[], db}) {
         let placeHolders = await BasicQuerys.addPlaceHolders({list: cols})
         let arrayElements = await BasicQuerys.arrayElements({cols, vals})
         let values = [table, ...arrayElements, key, id]
         let query = (`UPDATE ?? SET ${placeHolders} WHERE ?? = ?`)
         
-        query = await BasicQuerys.querys({query, values})
+        query = await BasicQuerys.querys({query, values, db})
         
         return {msn:"test"}    //<------------------------------------------------------ 
     }
 
-    static async deleteElement ({table, vals, key = "id"}) {
-        // let query = `DELETE FROM ${table} WHERE ${key} = ?`
+    static async deleteElement ({table, vals, key, db}) {
         let query = `DELETE FROM ?? WHERE ?? = ?`
+        let values = [table, ...key, ...vals]
+        console.log(values)
 
-        query = await BasicQuerys.querys({query, values: [[table, key], vals]})
+        query = await BasicQuerys.querys({query, values, db})
         return query
     }
 

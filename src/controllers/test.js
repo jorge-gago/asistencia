@@ -48,9 +48,9 @@ const update = async ( req, res) => {
 const deletes = async ( req, res) => { //<---------- falta ajustar delete parametros
     //console.log("delete element")
     let table = req.table
-    let cols = req.body.fields ?? null
+    let cols = req.body.fields ?? ["id"]
     let vals = req.body.data
-    let resul = await deleteElement()
+    let resul = await deleteElement({table, cols, vals})
     res.send(resul)
 }
 
