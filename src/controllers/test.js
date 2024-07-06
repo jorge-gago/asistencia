@@ -1,8 +1,6 @@
 import {getElements, getFilterElements, createElement, deleteElement, updateElement} from "../modules/test.js"
 
-import {dev} from "../modules/test.js" // for test 
-
-// const options = {test: "test1"}
+import {dev} from "../modules/test.js" 
 
 const elements = async (req, res) => {
     // console.log("en controller ")
@@ -20,15 +18,14 @@ const filter = async (req, res) => {
     res.send(resul)
 }
 
-
 const create = async ( req, res) => {
     //console.log("creando")
     let table = req.table
     let cols = req.body.fields 
     let vals = req.body.data
 
-    console.log(cols)
-    console.log(`table: ${table} / cols: ${cols} /  vals: ${vals}`)
+    //console.log(cols)
+    //console.log(`table: ${table} / cols: ${cols} /  vals: ${vals}`)
 
     // let resul = {msn: 'test'}
     let resul = await createElement({table, cols, vals})
@@ -45,7 +42,7 @@ const update = async ( req, res) => {
     res.send(resul)
 }
 
-const deletes = async ( req, res) => { //<---------- falta ajustar delete parametros
+const deletes = async ( req, res) => {
     //console.log("delete element")
     let table = req.table
     let cols = req.body.fields ?? ["id"]
@@ -54,15 +51,10 @@ const deletes = async ( req, res) => { //<---------- falta ajustar delete parame
     res.send(resul)
 }
 
-
 const test = async ( req, res) => {
     let resu = await dev({table: req.table})
 
     res.json(resu)
 }
-
-
-
-
 
 export {elements, filter, create, deletes, update, test}
