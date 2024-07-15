@@ -3,15 +3,15 @@ import {getElements, getFilterElements, createElement, deleteElement, updateElem
 import {dev} from "../modules/test.js" 
 
 const elements = async (req, res) => {
-    // console.log("en controller ")
-    let table = req.table
+    // console.log("controller ")
+    let table = req.query.table
     let resul = await getElements({table})
     res.send(resul)
 } 
 
 const filter = async (req, res) => {
     //console.log("filter")
-    let table = req.table
+    let table = req.query.table
     let cols = req.body.fields 
     let vals = req.body.data
     let resul = await getFilterElements({table, cols, vals})
@@ -20,7 +20,7 @@ const filter = async (req, res) => {
 
 const create = async ( req, res) => {
     //console.log("creando")
-    let table = req.table
+    let table = req.query.table
     let cols = req.body.fields 
     let vals = req.body.data
 
@@ -34,7 +34,7 @@ const create = async ( req, res) => {
 
 const update = async ( req, res) => {
     //console.log("update")
-    let table = req.table
+    let table = req.query.table
     let cols = req.body.fields 
     let vals = req.body.data
     let id = req.body.id
@@ -44,7 +44,7 @@ const update = async ( req, res) => {
 
 const deletes = async ( req, res) => {
     //console.log("delete element")
-    let table = req.table
+    let table = req.query.table
     let cols = req.body.fields ?? ["id"]
     let vals = req.body.data
     let resul = await deleteElement({table, cols, vals})
@@ -52,7 +52,7 @@ const deletes = async ( req, res) => {
 }
 
 const test = async ( req, res) => {
-    let resu = await dev({table: req.table})
+    let resu = await dev({table: req.query.table})
 
     res.json(resu)
 }

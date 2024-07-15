@@ -1,29 +1,18 @@
-//permite el paso segun el rol
+import {routesTables} from "../configs/authToPass.js"
 
-auth = (pasan = [])=>{
-    //let roles = pasan 
-    return (req, res, next)=>{
-        try{
-            let act = req.query.token
-            //console.log(act)
-            act = act.rol
-            //console.log(act)
-            //console.log(act == "admin")
-            if( act == "admin" || pasan.includes(act)){
-                next()
-            }else{
-                res.status(500).json({
-                    mensaje:"error en rol no puedes pasar"
-                })
-            }
-        }catch(err){
-            console.log('error en auth')
-            res.status(500).json({
-                mensaje:"error en rol",
-                err
-            })
+export const auth = ({allow = null}) => {
+    return (req, res, next) => {
+        let mtd = req.method.toLowerCase()
+        let table = req.query.table.toLowerCase()
+        let rol = req.query.rol//.toLowerCase()
+        let filter = allow ?? routesTables[table][mtd]
+
+        if(!filter[rol]) {
+            console.log("error")
+            res.status(500).send({error: "error", msn:"no pass"})
+            return 0
         }
+
+        next()
     }
 }
-
-module.exports = auth

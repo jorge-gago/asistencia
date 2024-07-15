@@ -1,3 +1,5 @@
 export const routesTables = {
-    test: {admin:true, guest:false}
+    test1: {
+        "get": { admin:true, guest:false} 
+    }
 }

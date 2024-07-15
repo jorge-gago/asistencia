@@ -1,12 +1,14 @@
 import express from "express"
-import { connection as db}  from "./src/utils/database.js"
+import { connection}  from "./src/utils/database.js"
 import {router} from "./src/routes/router.js"
 import {BasicQuerys as query} from "./src/utils/BasicQuerys.js" 
 
 const PORT = process.env.PORT ?? 3000
 const app = express()
+let db
 
 //set database connection 
+db = await connection({})
 query.setDb({db})
 
 app.use(express.json())

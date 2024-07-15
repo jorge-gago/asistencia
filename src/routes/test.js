@@ -1,10 +1,12 @@
 import express from "express"
 import { toTable } from "../middleware/toTable.js"
+import { auth} from "../middleware/auth.js"
 import {elements, filter, create, deletes, update, test} from "../controllers/test.js"
+
 
 const router = express.Router()
 
-router.get("/:sec", toTable, elements)
+router.get("/:sec", toTable, auth({allow: {admin: true}}), elements)
 
 router.post("/:sec/get", toTable, filter)
 

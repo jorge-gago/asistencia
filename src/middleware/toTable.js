@@ -3,7 +3,8 @@
 import {routesTables} from "../configs/routeTable.js"  
 
 export const toTable = (req, res, next) => {
-    req.table = null
+    req.query.table = null
+    
     let tab = req.params.sec
     let select = routesTables[`${tab}`]
 
@@ -13,7 +14,7 @@ export const toTable = (req, res, next) => {
         return 0
     }
 
-    req.table = select
+    req.query.table = select
     next()
 }
 
