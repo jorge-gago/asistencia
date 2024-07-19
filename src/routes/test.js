@@ -3,21 +3,18 @@ import { toTable } from "../middleware/toTable.js"
 import { auth} from "../middleware/auth.js"
 import {elements, filter, create, deletes, update, test} from "../controllers/test.js"
 
-
 const router = express.Router()
 
-router.get("/:sec", toTable, auth({allow: {admin: true}}), elements)
+router.get("/:sec", toTable, auth({}), elements)
 
-router.post("/:sec/get", toTable, filter)
+router.post("/:sec/get", toTable, auth({}), filter)
 
-router.post("/:sec", toTable, create)
+router.post("/:sec", toTable, auth({}), create)
 
-router.put("/:sec", toTable, update)
+router.put("/:sec", toTable, auth({}), update)
 
-router.delete("/:sec", toTable, deletes)
+router.delete("/:sec", toTable, auth({}), deletes)
 
-router.use("/t/:sec", toTable, test)
+router.use("/t/:sec", toTable, auth({}), test)
 
-// router.use("/test", test)
-
-export {router as test}   
+export {router as test}

@@ -1,4 +1,5 @@
 
 export const routesTables = {
-    test: "test1"
+    test: "test1",
+    users: "usuarios"
 }

@@ -8,12 +8,13 @@ export const toTable = (req, res, next) => {
     let tab = req.params.sec
     let select = routesTables[`${tab}`]
 
+    console.log("url ",tab,"table ", select)//<-----------------------------------------------
+
     if (!select) {
         console.log("404 route")
         res.status(404).json({msn: "404 route not found"})
         return 0
     }
-
     req.query.table = select
     next()
 }
