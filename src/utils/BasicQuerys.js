@@ -47,11 +47,18 @@ export class BasicQuerys {
     }
 
     static async createElement ({table, cols, vals, db}) {
-        let query = `INSERT INTO ?? (??) VALUES (?) `
-        return BasicQuerys.querys({query, values:[ table, ...cols, vals], db})
+        let placeHolders = await BasicQuerys.addPlaceHolders({list: cols, fill: "??"})
+        let valsHolders = await BasicQuerys.addPlaceHolders({list: vals, fill: "?"})
+        let query = `INSERT INTO ?? (${placeHolders}) VALUES (${valsHolders}) `
+        let values = [ table, ...cols, ...vals]
+        return BasicQuerys.querys({query, values, db})
     }
  
     static async updateElement ({table, pk , key = "id", id, cols = [], vals=[], db}) {
+        if (!cols || !vals){
+            console.log("no data update")
+            return {error: "no data"}
+        }
         let placeHolders = await BasicQuerys.addPlaceHolders({list: cols})
         let arrayElements = await BasicQuerys.arrayElements({cols, vals})
         let values = [table, ...arrayElements, key, id]
@@ -71,9 +78,9 @@ export class BasicQuerys {
         return query
     }
 
-    static async addPlaceHolders ({list = [], div = ","}) {
+    static async addPlaceHolders ({list = [], fill = `?? = ?`,  div = ","}) {
         // let placeHolder = `?? = ?${div} `
-        let placeHolder = `?? = ?`
+        let placeHolder = fill
         let placeHolders = []
 
         list.forEach(element => {

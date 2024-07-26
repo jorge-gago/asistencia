@@ -8,7 +8,7 @@ export const toTable = (req, res, next) => {
     let tab = req.params.sec
     let select = routesTables[`${tab}`]
 
-    console.log("url ",tab,"table ", select)//<-----------------------------------------------
+    //console.log("url ",tab,"table ", select)//<-----------------------------------------------
 
     if (!select) {
         console.log("404 route")
