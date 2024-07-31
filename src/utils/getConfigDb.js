@@ -15,8 +15,8 @@ export const connectionDb = async () => {
 const generateConfigs = async ({}) =>{
     console.log("geting info & generate config files")
     let db = await connectionDb()
-    // await setAllows({name: "test_allows", fileUrl:"./src/configs", db})
-    // await setToTable({name: "test_route", fileUrl:"./src/configs", db})
+    await setAllows({name: "allows", fileUrl:"./src/configs", db, tableDivs: "roles"})
+    await setToTable({name: "routesTables", fileUrl:"./src/configs", db})
 
     process.exit(1)
 }

@@ -11,7 +11,7 @@ export const setToTable = async ({tablesLst = null, name, fileUrl, extension, db
     generateFile({fileName: txt, data, obj, route:fileUrl})
 }
 
-export const setAllows = async ({name, fileUrl, routes = null, calls = ["get", "post", "put", "delete"], mods = null, div = null, value = true, tableDivs = "other", fieldDivs = "rol" , db}) => {
+export const setAllows = async ({name, fileUrl, routes = null, calls = ["get", "post", "put", "delete"], mods = null, div = null, value = true, tableDivs = "others", fieldDivs = "rol" , db}) => {
     let nameTxt = await format({text: name})
     let tables = routes? routes: await getTables({db})
     let divs = div

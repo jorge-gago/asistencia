@@ -1,1 +1,0 @@
-export const testRoute = { other: 'other', test1: 'test1', usuarios: 'usuarios' }

@@ -1,23 +1,18 @@
-const bcrypt = require("bcrypt")
 
-clave_hash = (req, res, next)=>{
+import bcrypt from "bcrypt"
+
+export const clave_hash = (req, res, next)=>{
     try {
-        let datos = req.body.campos
-        if (datos.pass){
-            bcrypt.hash(datos.pass, 10, (err, hash)=>{
-                if(err){
-                return res.json({mensaje: "problemas con la contaseña"})
-                }
-                req.query.pass = hash
-                next()
-            })
-        }else{ 
-            console.log("no pass")
+        let password = req.body.fields.pass
+        bcrypt.hash(datos.pass, 10, (err, hash)=>{
+            if(err){
+                return res.status(500).json({mensaje: "error user or password "})
+            }
+            req.query.pass = hash
             next()
-        }
+        })
     } catch (err) {
-        res.status(500).json({mensaje: "error en clave"})
+        console.log(err)
+        res.status(500).json({mensaje: "error user or password "})
     }
 }
-
-module.exports = clave_hash

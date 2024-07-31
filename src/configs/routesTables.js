@@ -1,0 +1,20 @@
+export const routesTables = {
+  alumnos: 'alumnos',
+  asistencias_alumno: 'asistencias_alumno',
+  aulas: 'aulas',
+  ciclos: 'ciclos',
+  clase_alumno: 'clase_alumno',
+  clases: 'clases',
+  clases_curso: 'clases_curso',
+  codigosasistencia: 'codigosasistencia',
+  cursos: 'cursos',
+  empleados: 'empleados',
+  fecha_clase: 'fecha_clase',
+  horario_clase: 'horario_clase',
+  horas: 'horas',
+  modulos: 'modulos',
+  roles: 'roles',
+  semanas: 'semanas',
+  ufs: 'ufs',
+  usuarios: 'usuarios'
+}

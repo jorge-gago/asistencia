@@ -1,4 +1,4 @@
-import {routesTables} from "../configs/authToPass.js"
+import {allows} from "../configs/allows.js"
 
 export const auth = ({allow = null, mod = null}) => {
     return (req, res, next) => {
@@ -24,15 +24,15 @@ const filters = ({mod, allow, table, method}) => {
     if (mod) {
         return isMod({mod, table, method})
     }
-    if (routesTables[table][method]) {
-        return routesTables[table][method]
+    if (allows[table][method]) {
+        return allows[table][method]
     }
     return false
 }
 
 const isMod = ({mod, vals}) => {
-    if (routesTables[table][mod][method]) {
-        return routesTables[table][mod][method]
+    if (allows[table][mod][method]) {
+        return allows[table][mod][method]
     }
     return false
 }
