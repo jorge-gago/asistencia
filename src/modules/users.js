@@ -7,19 +7,21 @@ export const getLogin = async ({table, values}) => {
     return res
 }
 
-export const updateUser = async ({table,  active = true, password, id}) => {
+export const updateUser = async ({table,  active = true, password = false, id}) => {
     let isActive = active? 1 : 0
-    let cols = ["password", "acceso"]
-    let vals = [password, isActive]
+    let cols = password? ["password", "acceso"] : [ "acceso"]
+    let vals = password? [password, isActive] : [isActive]
     let res = await query.updateElement({table, id, cols, vals})
     return res
 }
 
-export const setUser = async ({table, password, active = true}) => {
+export const setUser = async ({table, password, active = true, empleado, rol}) => {
     let isActive = active? 1 : 0
-    let code = "abc123" //<---------------------------
-    let pass = password//<----------------------------
-    let cols = [ "codigo", "password", "acceso"]
-    let vals = [code, pass, isActive]
-    let res = query.createElement({table, cols, vals})
+    let code = "abc123" //<---------------------------call generate user
+    let pass = password
+    let cols = [ "codigo", "password", "acceso", "empleado", "rol"]
+    let vals = [code, pass, isActive, empleado, rol]
+    console.log(cols, vals)
+    let res = await query.createElement({table, cols, vals})
+    return res
 }

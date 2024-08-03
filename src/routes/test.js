@@ -17,4 +17,6 @@ router.delete("/:sec", toTable, auth({}), deletes)
 
 router.use("/t/:sec", toTable, auth({}), test)
 
+// console.log(`${auth}`)
+
 export {router as test}

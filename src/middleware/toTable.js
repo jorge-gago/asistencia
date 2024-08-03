@@ -1,6 +1,6 @@
 // selecciona la tabla para cada ruta y la envia al modulo generico o devuelve 404 si no existe una tabla en esa ruta
 
-import {routesTables} from "../configs/routesTable.js"  
+import {routesTables} from "../configs/routesTables.js"  
 
 export const toTable = (req, res, next) => {
     req.query.table = null
